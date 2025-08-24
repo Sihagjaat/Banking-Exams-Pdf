@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Banking Exam's Pdf</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Banking Exam's Pdf — Home</title>
+  <meta name="description" content="Free PDFs, PYQs & notes for IBPS/SBI/RRB — search & share." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Banking Exam's Pdf</h1>
-    <input type="text" id="searchInput" placeholder="Search PDFs...">
-    <select id="categoryFilter">
-      <option value="all">All Categories</option>
-    </select>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Banking Exam's Pdf</a>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+      </nav>
+    </div>
   </header>
 
-  <main id="postsContainer" class="grid"></main>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Free PDFs for Banking Aspirants</h1>
+      <p class="muted">IBPS • SBI • RRB • PYQs • Notes • Short Tricks</p>
 
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search title, tags, description..." />
+        <select id="category">
+          <option value="">All Categories</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Recent uploads</h2>
+      <div id="grid" class="grid"></div>
+      <div id="noresults" class="empty hidden">Kuch nahin mila — try different keywords.</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <small>© <span id="year"></span> Banking Exam's Pdf — shareable links: <code>post.html?id=your-id</code></small>
+    </div>
+  </footer>
+
+  <!-- load data first, then app logic -->
+  <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
-</html>
+    </html>
