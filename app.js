@@ -1,46 +1,58 @@
-async function loadPosts() {
-  const res = await fetch('posts.json');
-  const data = await res.json();
-  const posts = data.posts;
+// app.js
+document.getElementById('year').textContent = new Date().getFullYear();
+const grid = document.getElementById('grid');
+const searchInput = document.getElementById('search');
+const catSelect = document.getElementById('category');
+const noresults = document.getElementById('noresults');
 
-  const searchInput = document.getElementById('searchInput');
-  const categoryFilter = document.getElementById('categoryFilter');
-  const container = document.getElementById('postsContainer');
-
-  // fill category dropdown
-  const categories = [...new Set(posts.map(p => p.category))];
-  categories.forEach(cat => {
+// build category list
+(function populateCategories(){
+  const cats = Array.from(new Set(posts.map(p => p.category).filter(Boolean))).sort();
+  for(const c of cats){
     const opt = document.createElement('option');
-    opt.value = cat;
-    opt.textContent = cat;
-    categoryFilter.appendChild(opt);
-  });
-
-  function render() {
-    const query = searchInput.value.toLowerCase();
-    const category = categoryFilter.value;
-
-    container.innerHTML = '';
-    posts
-      .filter(p => (category === 'all' || p.category === category))
-      .filter(p => p.title.toLowerCase().includes(query) || p.description.toLowerCase().includes(query))
-      .forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <img src="${p.image}" alt="${p.title}">
-          <h3>${p.title}</h3>
-          <p>${p.description}</p>
-          <a href="post.html?id=${p.id}">Read More</a>
-        `;
-        container.appendChild(card);
-      });
+    opt.value = c;
+    opt.textContent = c;
+    catSelect.appendChild(opt);
   }
+})();
 
-  searchInput.addEventListener('input', render);
-  categoryFilter.addEventListener('change', render);
-
-  render();
+function cardHtml(p){
+  const postUrl = `post.html?id=${encodeURIComponent(p.id)}`;
+  const date = new Date(p.date).toLocaleDateString();
+  return `
+    <article class="card">
+      <a href="${postUrl}" aria-label="${p.title}">
+        <img class="thumb" src="${p.image}" alt="${p.title}">
+      </a>
+      <div class="card-body">
+        <div class="card-meta">${date} • ${p.category||'General'}</div>
+        <h3 class="card-title"><a href="${postUrl}">${p.title}</a></h3>
+        <p class="card-desc">${p.description}</p>
+        <div class="card-actions">
+          <a class="btn link" href="${postUrl}">Open</a>
+          <a class="btn primary" href="${p.drive}" target="_blank" rel="noopener">Download</a>
+        </div>
+      </div>
+    </article>
+  `;
 }
 
-loadPosts();
+function render(){
+  const q = (searchInput.value || '').trim().toLowerCase();
+  const cat = (catSelect.value || '').trim().toLowerCase();
+  const filtered = posts.filter(p => {
+    const hay = (p.title + ' ' + (p.description||'') + ' ' + (p.tags||[]).join(' ')).toLowerCase();
+    const matchesQ = !q || hay.includes(q);
+    const matchesC = !cat || (p.category||'').toLowerCase() === cat;
+    return matchesQ && matchesC;
+  }).sort((a,b)=> new Date(b.date)-new Date(a.date));
+
+  grid.innerHTML = filtered.map(cardHtml).join('') || '';
+  noresults.classList.toggle('hidden', filtered.length > 0);
+}
+
+searchInput.addEventListener('input', render);
+catSelect.addEventListener('change', render);
+
+// initial render
+render();
