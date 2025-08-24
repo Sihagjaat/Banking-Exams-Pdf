@@ -1,0 +1,15 @@
+{
+  "posts": [
+    {
+      "id": "ibps-po-pyqs-2022-24",
+      "title": "IBPS PO PYQs (2022–24)",
+      "description": "Topic-wise previous year questions with solutions.",
+      "image": "https://via.placeholder.com/600x300.png?text=IBPS+PO+PYQs",
+      "drive": "https://drive.google.com/your-link",
+      "category": "PYQs",
+      "tags": ["IBPS", "PO", "PYQs"],
+      "date": "2025-08-24",
+      "contentHtml": "<p>Detailed explanation with syllabus mapping here.</p>"
+    }
+  ]
+}
