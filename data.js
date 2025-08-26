@@ -5,7 +5,7 @@ const posts = [
     id: "200+simplification-Questions",
     title: "200+ Simplification Questions Pdf For Banking Exam",
     description: "All Type of Simplification Questions ",
-    image: "https://ibb.co/cKYhCDNH",
+    image: "https://i.ibb.co/4w1RYPjG/IMG-20250824-WA0017.jpg",
     drive: "https://drive.google.com/uc?id=1sHE5RZeXknmZ327VHv5hGFhMGH4giuR8&export=download",
     category: "Quants",
     tags: ["Quants", "Simplification", "Banking"],
