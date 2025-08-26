@@ -13,7 +13,7 @@ const posts = [
     contentHtml: "<h3>Download Now</h3>"
   },
   {
-    id: "quant-short-t"
+    id: "quant-short-t",
     title: "Quant Short Tricks",
     description: "Speed tricks: base-100, near-squares, approximation and DI warmups.",
     image: "https://via.placeholder.com/1200x600.png?text=Quant+Tricks",
